@@ -1,0 +1,33 @@
+{
+  "name": "rest_api_test",
+  "version": "0.0.1",
+  "description": "REST API TEST for daliworks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kimilhee/thingplusAPITest.git"
+  },
+  "keywords": [
+    "rest",
+    "thingplus",
+    "daliworks"
+  ],
+  "author": "daliworks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kimilhee/thingplusAPITest/issues"
+  },
+  "homepage": "https://github.com/Kimilhee/thingplusAPITest#readme",
+  "devDependencies": {
+    "chakram": "^1.5.0"
+  },
+  "dependencies": {
+    "ajv": "^5.0.0",
+    "async": "^2.3.0",
+    "json-schema-ref-parser": "^3.1.2",
+    "lodash": "^4.17.4"
+  }
+}

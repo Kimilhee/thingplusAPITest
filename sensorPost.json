@@ -1,0 +1,18 @@
+[
+  { 
+    "req": {"network":"daliworks","driverName":"daliworksEmulator","model":"humidityEmulator","sequence":"1","type":"humidity","category":"sensor","name":"humidity_1","reqId":"humidity-8cf8afabb6264e2d8ec15c5955e84e5c-1","deviceId":"9944c36915f44a428b07e25c5e5e72c9","virtual":"y"},
+    "res": {"network":"daliworks","driverName":"daliworksEmulator","model":"humidityEmulator","sequence":"1","type":"humidity","category":"sensor","name":"humidity_1","deviceId":"9944c36915f44a428b07e25c5e5e72c9","virtual":"y","owner":"8cf8afabb6264e2d8ec15c5955e84e5c","mtime":1492759707571,"ctime":1492759707571,"id":"humidity-8cf8afabb6264e2d8ec15c5955e84e5c-1"}
+  },
+  { 
+    "req": {"network":"daliworks","driverName":"daliworksEmulator","model":"colorEmulator","sequence":"1","type":"color","category":"sensor","name":"color_1","reqId":"color-8cf8afabb6264e2d8ec15c5955e84e5c-1","deviceId":"9944c36915f44a428b07e25c5e5e72c9","virtual":"y"},
+    "res": {"network":"daliworks","driverName":"daliworksEmulator","model":"colorEmulator","sequence":"1","type":"color","category":"sensor","name":"color_1","deviceId":"9944c36915f44a428b07e25c5e5e72c9","virtual":"y","owner":"8cf8afabb6264e2d8ec15c5955e84e5c","mtime":1492759707652,"ctime":1492759707652,"id":"color-8cf8afabb6264e2d8ec15c5955e84e5c-1"}
+  },  
+  { 
+    "req": {"network":"daliworks","driverName":"daliworksInternal","model":"gatewaysCounter","type":"count","category":"sensor","name":"count_1","reqId":"gatewaysCounter-8cf8afabb6264e2d8ec15c5955e84e5c","deviceId":"f1625c26066b4d8da18c3d21d7ca2d2a","virtual":"y"},
+    "res": {"network":"daliworks","driverName":"daliworksInternal","model":"gatewaysCounter","type":"count","category":"sensor","name":"count_1","deviceId":"f1625c26066b4d8da18c3d21d7ca2d2a","virtual":"y","owner":"8cf8afabb6264e2d8ec15c5955e84e5c","mtime":1492759707705,"ctime":1492759707705,"id":"gatewaysCounter-8cf8afabb6264e2d8ec15c5955e84e5c"}
+  },
+  { 
+    "req": {"network":"daliworks","driverName":"daliworksInternal","model":"sensorsCounter","type":"count","category":"sensor","name":"count_2","reqId":"sensorsCounter-8cf8afabb6264e2d8ec15c5955e84e5c","deviceId":"f1625c26066b4d8da18c3d21d7ca2d2a","virtual":"y"},
+    "res": {"network":"daliworks","driverName":"daliworksInternal","model":"sensorsCounter","type":"count","category":"sensor","name":"count_2","deviceId":"f1625c26066b4d8da18c3d21d7ca2d2a","virtual":"y","owner":"8cf8afabb6264e2d8ec15c5955e84e5c","mtime":1492759707770,"ctime":1492759707770,"id":"sensorsCounter-8cf8afabb6264e2d8ec15c5955e84e5c"}
+  }
+]

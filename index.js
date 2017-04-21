@@ -26,41 +26,45 @@ var TEST_API_LIST = [
   // "/oauth2/authorize",
   // "/oauth2/token",
   
-  "/users/me",
-  "/users/{id}",
-  "/users",
+  // "/users/me",
+  // "/users/{id}",
+  // "/users",
+  // 
+  // "/gatewayModels",
+  // "/gatewayModels/{id}",
+  // 
+  // "/sensorTypes",
+  // "/sensorTypes/{id}",
+  // 
+  // "/sensorDrivers",
+  // "/sensorDrivers/{id}",
+  // 
+  // "/pushDevices",
+  // "/pushDevices/{id}",
+  // 
+  // "/rules",
+  // "/rules/{id}",
   
-  "/gatewayModels",
-  "/gatewayModels/{id}",
-  
-  "/sensorTypes",
-  "/sensorTypes/{id}",
-  
-  "/sensorDrivers",
-  "/sensorDrivers/{id}",
-  
-  "/pushDevices",
-  "/pushDevices/{id}",
-  
-  "/rules",
-  "/rules/{id}",
-  
-  // "/registerGateway",
-  // "/gateways",
-  // "/gateways/{id}",
+  "/registerGateway",
+  "/gateways",
   
   // "/gateways/{owner}/devices",
-  // "/gateways/{owner}/devices/{id}",
   // "/gateways/{owner}/sensors",
   // "/gateways/{owner}/sensors/{id}",
-  // "/gateway/{id}/status",
+  
   // "/gateways/{owner}/sensors/{id}/status",
   // "/gateways/{owner}/sensors/{id}/series",
+  
+  // "/gateways/{owner}/devices/{id}",
+  
   // "/controlActuator",
   
   // "/registerGatewayKey",
   // "/activateGatewayKey",
   // "/manageGateway",
+  
+  // "/gateway/{id}/status",
+  "/gateways/{id}",
 ];
 
 var METHOD_STATUS = {
@@ -78,7 +82,8 @@ var afterEffect = {
   "/sensorDrivers:get": tutil.saveObjectForNextApiCall.bind(null, 'sensorDrivers'),
   "/pushDevices:post": tutil.saveObjectForNextApiCall.bind(null, 'pushDevices'),
   "/rules:post": tutil.saveObjectForNextApiCall.bind(null, 'rules'),
-  "/gateways:get": tutil.saveObjectForNextApiCall.bind(null, 'gateways')
+  "/registerGateway:post": tutil.saveObjectForNextApiCall.bind(null, 'gateways'),
+  "/gateways/{id}:get": tutil.saveObjectForNextApiCall.bind(null, 'gateways')
 };
 
 
@@ -151,11 +156,16 @@ describe("Rest API Test", function () {
             
             if (statusCode >= 300) {
               console.log('Error!! statusCode=', statusCode);
-              console.log('req body:', prettyjson.render(reqBody));
-              console.log('res body:', prettyjson.render(body));
+              console.log('>>>>>>> req body:\n', reqBody && prettyjson.render(reqBody));
+              console.log('<<<<<<< res body:\n', body && prettyjson.render(body));
+            } else {
+              // console.log('@@@@@@@@@@@ renderedUrl=', renderedUrl);
+              // console.log('>>>>>>> req body:\n', reqBody && prettyjson.render(reqBody));
+              // console.log('<<<<<<< res body:\n', body && prettyjson.render(body));
             }
+              
             expect(schema, ' statusCode=' + statusCode).to.be.an.object;
-            expect(res).to.have.status(METHOD_STATUS[method]);
+            expect(res, ' @statusCode=' + statusCode).to.have.status(METHOD_STATUS[method]);
             
             if (method === 'delete') { return; }
             
@@ -164,6 +174,8 @@ describe("Rest API Test", function () {
             
             var storeObj = afterEffect[url + ':' + method];
             storeObj && storeObj(body.data);
+            
+            // console.log('@schema=', schema);
             
             var isValid = ajv.validate(schema, body);
             if (!isValid) {

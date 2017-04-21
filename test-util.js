@@ -22,10 +22,6 @@ function saveObjectForNextApiCall(apiStartName, obj) {
     obj = obj[0];
   }
   
-  if (apiStartName === 'gateways') {
-    console.log('apiStartName=', apiStartName, obj);
-  }
-  
   apiObjects[apiStartName] = obj;
 }
 

@@ -4,7 +4,7 @@
   "description": "REST API TEST for daliworks",
   "main": "index.js",
   "scripts": {
-    "test": "mocha index.js",
+    "test": "mocha index.js --timeout 9000",
     "errTest": "mocha errTest.js"
   },
   "repository": {

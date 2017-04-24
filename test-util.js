@@ -37,13 +37,14 @@ function getApiStartName(path) {
 function renderUrl(path, obj) {
   var apiStartName = getApiStartName(path);
   obj = apiObjects[apiStartName];
+  // console.log('################@apiStartName=', apiStartName, ' obj=', obj);
+  
   if (!obj) { return path; }
   
-  // console.log('@apiStartName=', apiStartName, ' obj=', obj);
   return supplant(path, obj);
 }
 
-function getRequestBody(path, method, opInfo) {
+function getRequestBody(opInfo, path, method) {
   if (method === 'delete') { return {}; }
   
   var apiStartName = getApiStartName(path);
@@ -68,14 +69,14 @@ function removeValues(obj, removeKeys) {
 }
 
 function login(config, done) {
-  chakram.post(config.host + "/login", config.login).then(function(res) {
+  chakram.post(config.host + '/login', config.login).then(function(res) {
     chakram.expect(res).to.have.status(200);
     done({jar: res.jar});
   });
 }
 
 function logout(config, done) {
-  chakram.post(config.host + "/logout").then(function(res) {
+  chakram.post(config.host + '/logout').then(function(res) {
     chakram.expect(res).to.have.status(200);
     console.log('Logout OK!');
     done();
@@ -90,4 +91,4 @@ module.exports = {
   saveObjectForNextApiCall: saveObjectForNextApiCall,
   renderUrl: renderUrl,
   getRequestBody: getRequestBody,
-}
+};

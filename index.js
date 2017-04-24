@@ -20,50 +20,51 @@ var config = require('./config_ihmini'),
 // 룰을 예로 들면, /rules post, /rules get (list), /rules/{id} get, /rules/{id} put, /rules/{id} delete
 // 이와 같이 한 이유는 처음 post 데이터를 get하고 put 한 다음에 delete 하는 사이클로 테스트되도록 하고자 함임.
 var REST_METHODS = ['post', 'get', 'put', 'delete'];  // order is important for test
+// var REST_METHODS = ['post', 'get'];  // order is important for test
 
 var TEST_API_LIST = [
-  // "/oauth2/authClients",
-  // "/oauth2/authorize",
-  // "/oauth2/token",
+  // '/oauth2/authClients',
+  // '/oauth2/authorize',
+  // '/oauth2/token',
   
-  // "/users/me",
-  // "/users/{id}",
-  // "/users",
-  // 
-  // "/gatewayModels",
-  // "/gatewayModels/{id}",
-  // 
-  // "/sensorTypes",
-  // "/sensorTypes/{id}",
-  // 
-  // "/sensorDrivers",
-  // "/sensorDrivers/{id}",
-  // 
-  // "/pushDevices",
-  // "/pushDevices/{id}",
-  // 
-  // "/rules",
-  // "/rules/{id}",
+  '/users/me',
+  '/users/{id}',
+  '/users',
+  
+  '/gatewayModels',
+  '/gatewayModels/{id}',
+  
+  '/sensorTypes',
+  '/sensorTypes/{id}',
+  
+  '/sensorDrivers',
+  '/sensorDrivers/{id}',
+  
+  '/pushDevices',
+  '/pushDevices/{id}',
+  
+  '/rules',
+  '/rules/{id}',
   
   '/registerGateway',
   '/gateways',
   
-  // "/gateways/{owner}/devices",
-  // "/gateways/{owner}/sensors",
-  // "/gateways/{owner}/sensors/{id}",
+  '/gateways/{owner}/devices',
+  '/gateways/{owner}/sensors',
   
-  // "/gateways/{owner}/sensors/{id}/status",
-  // "/gateways/{owner}/sensors/{id}/series",
+  '/gateways/{owner}/sensors/{id}/status',
+  '/gateways/{owner}/sensors/{id}/series',
   
-  // "/gateways/{owner}/devices/{id}",
+  '/gateways/{owner}/sensors/{id}',
+  '/gateways/{owner}/devices/{id}',
   
-  // "/controlActuator",
-  
-  // "/registerGatewayKey",
-  // "/activateGatewayKey",
-  // "/manageGateway",
-  
-  // "/gateway/{id}/status",
+  // '/controlActuator',
+  // 
+  // '/registerGatewayKey',
+  // '/activateGatewayKey',
+  // '/manageGateway',
+  // 
+  // '/gateway/{id}/status',
   '/gateways/{id}',
 ];
 
@@ -82,9 +83,42 @@ var afterEffect = {
   '/sensorDrivers:get': tutil.saveObjectForNextApiCall.bind(null, 'sensorDrivers'),
   '/pushDevices:post': tutil.saveObjectForNextApiCall.bind(null, 'pushDevices'),
   '/rules:post': tutil.saveObjectForNextApiCall.bind(null, 'rules'),
-  '/registerGateway:post': tutil.saveObjectForNextApiCall.bind(null, 'gateways'),
+  '/registerGateway:post': function(gwObj) {
+    tutil.saveObjectForNextApiCall('gateways', gwObj);
+    
+    // for Gateway devices CRUD
+    tutil.saveObjectForNextApiCall('gateways-devices', {owner: gwObj.id});
+    // for Gateway sensors CRUD
+    tutil.saveObjectForNextApiCall('gateways-sensors', {owner: gwObj.id});
+  },
+  '/gateways/{owner}/devices:post': tutil.saveObjectForNextApiCall.bind(null, 'gateways-devices'),
+  // '/gateways/{owner}/sensors:post': tutil.saveObjectForNextApiCall.bind(null, 'gateways-sensors'),
+  '/gateways/{owner}/sensors:post': function(sensorObj) {
+    
+    tutil.saveObjectForNextApiCall('gateways-sensors', sensorObj);
+    
+    // for Gateway sensors status & series RU
+    tutil.saveObjectForNextApiCall('gateways-sensors-status', sensorObj);
+    tutil.saveObjectForNextApiCall('gateways-sensors-series', sensorObj);
+  },
+  '/gateways/{owner}/sensors/{id}/status:get': tutil.saveObjectForNextApiCall.bind(null, 'gateways-sensors-status'),
+  '/gateways/{owner}/sensors/{id}/series:get': tutil.saveObjectForNextApiCall.bind(null, 'gateways-sensors-status'),
   '/gateways/{id}:get': tutil.saveObjectForNextApiCall.bind(null, 'gateways'),
 };
+
+var preSetBody = {
+  '/gateways/{owner}/sensors/{id}/status:put': function(opInfo) {
+    return opInfo.parameters[0].schema.example;
+  },
+  '/gateways/{owner}/sensors/{id}/series:put': function() {
+    return {
+      value: '123',
+      time: Date.now()
+    };
+  }
+};
+
+var urlAndMethod;
 
 function removeSomeRestriction() {
   _.pull(swagger.definitions['rule-input'].properties.trigger.properties.method.required, 'params');
@@ -134,19 +168,22 @@ describe('Rest API Test', function () {
         if (!opInfo) { return; }
         
         it(opInfo.summary + ' Test:' + url + ' (' + method + ')', function () {
-          var apiCall, reqBody;
+          var apiCall, reqBody, getRequestBody;
           
           var renderedUrl = tutil.renderUrl(url);
           console.log(method.toUpperCase() + ':' + renderedUrl);
           if (method === 'get') {
             apiCall = chakram[method](config.host + renderedUrl, authInfo);
           } else {
-            reqBody = tutil.getRequestBody(url, method, opInfo);
+            // console.log('@useSchemaExample[url+:+method]=', useSchemaExample[url+':'+method]);
+            getRequestBody = preSetBody[url+':'+method] || tutil.getRequestBody;
+            reqBody = getRequestBody(opInfo, url, method);
             // console.log('@reqBody=', reqBody);
             apiCall = chakram[method](config.host + renderedUrl, reqBody, authInfo);
           }
           
           return apiCall.then(function(res) {
+            urlAndMethod = url+':'+method;
             var body = res.body;
             var statusCode = res.response.statusCode;
             var responseInfo = opInfo.responses[statusCode];
@@ -157,9 +194,9 @@ describe('Rest API Test', function () {
               console.log('>>>>>>> req body:\n', reqBody && prettyjson.render(reqBody));
               console.log('<<<<<<< res body:\n', body && prettyjson.render(body));
             // } else {
-              // console.log('@@@@@@@@@@@ renderedUrl=', renderedUrl);
-              // console.log('>>>>>>> req body:\n', reqBody && prettyjson.render(reqBody));
-              // console.log('<<<<<<< res body:\n', body && prettyjson.render(body));
+            //   console.log('@@@@@@@@@@@ renderedUrl=', renderedUrl);
+            //   console.log('>>>>>>> req body:\n', reqBody && prettyjson.render(reqBody));
+            //   console.log('<<<<<<< res body:\n', body && prettyjson.render(body));
             }
               
             expect(schema, ' statusCode=' + statusCode).to.be.an.object;
@@ -186,6 +223,14 @@ describe('Rest API Test', function () {
       });
       
     });
+  });
+  
+  afterEach('delay', function(done) {
+    if (urlAndMethod === '/gateways/{owner}/sensors:post') {
+      setTimeout(done, 6000);
+    } else {
+      done();
+    }
   });
   
   after('after hook', function (done) {

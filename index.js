@@ -45,8 +45,8 @@ var TEST_API_LIST = [
   // "/rules",
   // "/rules/{id}",
   
-  "/registerGateway",
-  "/gateways",
+  '/registerGateway',
+  '/gateways',
   
   // "/gateways/{owner}/devices",
   // "/gateways/{owner}/sensors",
@@ -64,7 +64,7 @@ var TEST_API_LIST = [
   // "/manageGateway",
   
   // "/gateway/{id}/status",
-  "/gateways/{id}",
+  '/gateways/{id}',
 ];
 
 var METHOD_STATUS = {
@@ -72,23 +72,22 @@ var METHOD_STATUS = {
   get: 200,
   put: 200,
   delete: 204
-}
+};
 
 // API 호출 테스트에스 각 API 호출 간에 tracking할 데이터를 관리하기 위함.
 var afterEffect = {
-  "/users/me:get": tutil.saveObjectForNextApiCall.bind(null, 'users'),
-  "/gatewayModels:get": tutil.saveObjectForNextApiCall.bind(null, 'gatewayModels'),
-  "/sensorTypes:get": tutil.saveObjectForNextApiCall.bind(null, 'sensorTypes'),
-  "/sensorDrivers:get": tutil.saveObjectForNextApiCall.bind(null, 'sensorDrivers'),
-  "/pushDevices:post": tutil.saveObjectForNextApiCall.bind(null, 'pushDevices'),
-  "/rules:post": tutil.saveObjectForNextApiCall.bind(null, 'rules'),
-  "/registerGateway:post": tutil.saveObjectForNextApiCall.bind(null, 'gateways'),
-  "/gateways/{id}:get": tutil.saveObjectForNextApiCall.bind(null, 'gateways')
+  '/users/me:get': tutil.saveObjectForNextApiCall.bind(null, 'users'),
+  '/gatewayModels:get': tutil.saveObjectForNextApiCall.bind(null, 'gatewayModels'),
+  '/sensorTypes:get': tutil.saveObjectForNextApiCall.bind(null, 'sensorTypes'),
+  '/sensorDrivers:get': tutil.saveObjectForNextApiCall.bind(null, 'sensorDrivers'),
+  '/pushDevices:post': tutil.saveObjectForNextApiCall.bind(null, 'pushDevices'),
+  '/rules:post': tutil.saveObjectForNextApiCall.bind(null, 'rules'),
+  '/registerGateway:post': tutil.saveObjectForNextApiCall.bind(null, 'gateways'),
+  '/gateways/{id}:get': tutil.saveObjectForNextApiCall.bind(null, 'gateways'),
 };
 
-
 function removeSomeRestriction() {
-  _.pull(swagger.definitions["rule-input"].properties.trigger.properties.method.required, 'params');
+  _.pull(swagger.definitions['rule-input'].properties.trigger.properties.method.required, 'params');
 }
 
 // output 체크시 불필요한 사항 제거
@@ -97,10 +96,10 @@ function removeSomeRestriction() {
   tutil.removeValues(swagger, ['x-stoplight']);
 }());
 
-describe("Rest API Test", function () {
+describe('Rest API Test', function () {
   var authInfo;
   
-  before("Login", function (done) {
+  before('Login', function (done) {
     async.series([
       function (next) {
         tutil.login(config, function(auth) {
@@ -110,7 +109,7 @@ describe("Rest API Test", function () {
             err = new Error('Login failed!');
           }
           next(err);
-        })
+        });
       },
       function parseSchema(next) {
         $RefParser.dereference(swagger, function(err, parsedSchema) {
@@ -121,11 +120,10 @@ describe("Rest API Test", function () {
     ], function(err) {
       expect(err).to.not.exist;
       done();
-    })
+    });
   });
   
-  var cnt = 0;
-  describe("api call", function () {
+  describe('api call', function () {
     _.forEach(TEST_API_LIST, function(url) {
       var obj = apiPaths[url];
       // console.log('url=', url);
@@ -158,7 +156,7 @@ describe("Rest API Test", function () {
               console.log('Error!! statusCode=', statusCode);
               console.log('>>>>>>> req body:\n', reqBody && prettyjson.render(reqBody));
               console.log('<<<<<<< res body:\n', body && prettyjson.render(body));
-            } else {
+            // } else {
               // console.log('@@@@@@@@@@@ renderedUrl=', renderedUrl);
               // console.log('>>>>>>> req body:\n', reqBody && prettyjson.render(reqBody));
               // console.log('<<<<<<< res body:\n', body && prettyjson.render(body));
@@ -190,8 +188,8 @@ describe("Rest API Test", function () {
     });
   });
   
-  after("after hook", function (done) {
-    tutil.logout(config, done)
+  after('after hook', function (done) {
+    tutil.logout(config, done);
     console.log('finished!');
   });
 });

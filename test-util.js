@@ -25,11 +25,19 @@ function saveObjectForNextApiCall(apiStartName, obj) {
   apiObjects[apiStartName] = obj;
 }
 
+var PARAM_PATH = new RegExp('/{[^{}]*}/', 'g');
+var END_PARAM_PATH = new RegExp('/{[^{}]*}$');
+function getApiStartName(path) {
+  path = path.replace(PARAM_PATH, '-');
+  path = path.replace(END_PARAM_PATH, '');
+  return path.slice(1);
+}
+
 // path : "/gateways/{owner}/devices/{id}" => /gateways/aabbccddee/devices/12345
 function renderUrl(path, obj) {
-  var apiStartName = path.split('/')[1];
+  var apiStartName = getApiStartName(path);
   obj = apiObjects[apiStartName];
-  if (!obj) return path;
+  if (!obj) { return path; }
   
   // console.log('@apiStartName=', apiStartName, ' obj=', obj);
   return supplant(path, obj);
@@ -38,7 +46,7 @@ function renderUrl(path, obj) {
 function getRequestBody(path, method, opInfo) {
   if (method === 'delete') { return {}; }
   
-  var apiStartName = path.split('/')[1];
+  var apiStartName = getApiStartName(path);
   var obj = opInfo.parameters[0].schema.example;
   if (method === 'put') {
     obj = apiObjects[apiStartName];

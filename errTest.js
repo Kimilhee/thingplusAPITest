@@ -14,10 +14,10 @@ var config = require('./config_testih'),
   
 var REST_METHODS = ['post', 'get', 'put', 'delete'];
 
-describe("Rest API Error Test", function () {
+describe('Rest API Error Test', function () {
   var authInfo;
   
-  before("Error Test Start", function (done) {
+  before('Error Test Start', function (done) {
     async.series([
       function (next) {
         tutil.login(config, function(auth) {
@@ -35,7 +35,7 @@ describe("Rest API Error Test", function () {
     });
   });
   
-  describe("API error call", function () {
+  describe('API error call', function () {
     beforeEach(function() {
       
     });
@@ -65,8 +65,6 @@ describe("Rest API Error Test", function () {
               console.log('@ caseObj.precondition=', caseObj.precondition);
               loginAuth = undefined;
             }
-            
-            var apiCall, reqBody;
             
             if (method === 'get') {
               // console.log('@loginAuth=', loginAuth);
@@ -102,8 +100,8 @@ describe("Rest API Error Test", function () {
     });
   });
   
-  after("after hook", function (done) {
-    tutil.logout(config, done)
+  after('after hook', function (done) {
+    tutil.logout(config, done);
     console.log('finished!');
   });
 });

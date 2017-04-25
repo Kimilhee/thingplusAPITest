@@ -7,7 +7,7 @@ module.exports = {
         "param" : "2",
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       },
       "unAuthorized" : {
@@ -31,7 +31,7 @@ module.exports = {
         "param" : "10000",
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       }
     }
@@ -42,7 +42,7 @@ module.exports = {
         "param" : "70",
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       }
     }
@@ -53,7 +53,7 @@ module.exports = {
         "param" : "70",
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       }
     }
@@ -64,7 +64,7 @@ module.exports = {
         "param" : "70",
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       }
     }
@@ -82,7 +82,7 @@ module.exports = {
         "param" : "1423432423",
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       }
     },
@@ -90,7 +90,8 @@ module.exports = {
       "missingParam" : {
         "reqBody" : {"tree":"914af1c57e5a4caf8ab42756cddb5267","_site":"1","devices":["a394cdf011134317a365118abf258e2b"],"virtual":"y","ctime":"1492577379016","name":"api test","status":"status.gateway.fmZH57","model":"32","sensors":["temperatureDaliworks-914af1c57e5a4caf8ab42756cddb5267","humidityDaliworks-914af1c57e5a4caf8ab42756cddb5267","onoff-914af1c57e5a4caf8ab42756cddb5267-1"],"_service":"1","autoCreateDiscoverable":"n","reportInterval":1200000,"deviceModels":[{"id":"a394cdf011134317a365118abf258e2b","model":"sensorSimulator"}],"mtime":"1492577384020","id":"914af1c57e5a4caf8ab42756cddb5267","location":{"longitude":-74.0059413,"latitude":40.7127837,"address":"미국 뉴욕"}},
         "expectedErr" : {
-          "statusCode" : "404"
+          "statusCode" : "404",
+          "errCode" : "NOT_FOUND"
         }
       },
       "unAuthorized" :{
@@ -106,7 +107,7 @@ module.exports = {
         "reqBody" : {"tree":"914af1c57e5a4caf8ab42756cddb5267","_site":"1","devices":["a394cdf011134317a365118abf258e2b"],"virtual":"y","ctime":"1492577379016","name":"api test","status":"status.gateway.fmZH57","model":"32","sensors":["temperatureDaliworks-914af1c57e5a4caf8ab42756cddb5267","humidityDaliworks-914af1c57e5a4caf8ab42756cddb5267","onoff-914af1c57e5a4caf8ab42756cddb5267-1"],"_service":"1","autoCreateDiscoverable":"n","reportInterval":1200000,"deviceModels":[{"id":"a394cdf011134317a365118abf258e2b","model":"sensorSimulator"}],"mtime":"1492577384020","id":"914af1c57e5a4caf8ab42756cddb5267","location":{"longitude":-74.0059413,"latitude":40.7127837,"address":"미국 뉴욕"}},
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       },
       "schemaErr01" : { // autoCreateDiscoverable: "test"
@@ -165,14 +166,7 @@ module.exports = {
           "errCode" : "SCHEMA_VALIDATE"
         }
       },
-      "schemaErr08" : { //format model:"32"
-        "param" : config.me.gwId,
-        "reqBody" : {"tree":"914af1c57e5a4caf8ab42756cddb5267","_site":"1","devices":["a394cdf011134317a365118abf258e2b"],"virtual":"y","ctime":"1492577379016","name":"api test","status":"status.gateway.fmZH57",model:"32","sensors":["temperatureDaliworks-914af1c57e5a4caf8ab42756cddb5267","humidityDaliworks-914af1c57e5a4caf8ab42756cddb5267","onoff-914af1c57e5a4caf8ab42756cddb5267-1"],"_service":"1","autoCreateDiscoverable":"n","reportInterval":1200000,"deviceModels":[{"id":"a394cdf011134317a365118abf258e2b","model":"sensorSimulator"}],"mtime":"1492577384020","id":"914af1c57e5a4caf8ab42756cddb5267","location":{"longitude":-74.0059413,"latitude":40.7127837,"address":"미국 뉴욕"}},
-        "expectedErr" :{
-          "statusCode" : "500"
-        }
-      },
-      "schemaErr09" : { //name -> names
+      "schemaErr08" : { //name -> names
         "param" : config.me.gwId,
         "reqBody" : {"tree":"914af1c57e5a4caf8ab42756cddb5267","_site":"1","devices":["a394cdf011134317a365118abf258e2b"],"virtual":"y","ctime":"1492577379016","names":"api test","status":"status.gateway.fmZH57","model":"32","sensors":["temperatureDaliworks-914af1c57e5a4caf8ab42756cddb5267","humidityDaliworks-914af1c57e5a4caf8ab42756cddb5267","onoff-914af1c57e5a4caf8ab42756cddb5267-1"],"_service":"1","autoCreateDiscoverable":"n","reportInterval":1200000,"deviceModels":[{"id":"a394cdf011134317a365118abf258e2b","model":"sensorSimulator"}],"mtime":"1492577384020","id":"914af1c57e5a4caf8ab42756cddb5267","location":{"longitude":-74.0059413,"latitude":40.7127837,"address":"미국 뉴욕"}},
         "expectedErr" :{
@@ -193,7 +187,7 @@ module.exports = {
         "param" : "1423432423",
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       }
     }
@@ -212,7 +206,7 @@ module.exports = {
         "param" : "sdfdsfsdfdsfs",
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       }
     },
@@ -228,7 +222,7 @@ module.exports = {
         "param" : "sdfdsfsdfdsfs",
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       },
       "schemaErr01" : { // add key "test":"test"
@@ -307,10 +301,10 @@ module.exports = {
         }
       },
       "conflict" : {
-        "reqBody" : {"reqId":config.me.deviceId,"name":"weater","model":"test"},
+        "reqBody" : {"reqId":config.me.deviceId,"name":"weather","model":"test"},
         "expectedErr" : {
           "statusCode" : "409",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "CONFLICT"
         }
       }
     },
@@ -326,12 +320,13 @@ module.exports = {
         "param" : "sdfdsfsdfdsfs",
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       }
     }
   },
-  "/gateways/"+config.me.gwId+"/sensors/" : {
+  "/gateways/{gwId}/sensors/" : {
+    "paramObj" : config.me,
     "get" : {
       "unAuthorized" : {
         "param" : config.other.sensorId,
@@ -344,7 +339,7 @@ module.exports = {
         "param" : "fdsfdsfsdf",
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       }
     },
@@ -362,7 +357,7 @@ module.exports = {
         "reqBody" : {"network": "daliworks","driverName": "daliworksWeather","model": "temperatureDaliworks","type": "temperature","category": "sensor","name": "temperature_1","deviceId": "a394cdf011134317a365118abf258e2b","virtual": "y","id": "temperatureDaliworks-914af1c57e5a4caf8ab42756cddb5267"},
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       },
       "schemaErr01" : { //add key "test":"test"
@@ -427,7 +422,15 @@ module.exports = {
         "reqBody" : {"network":"daliworks","driverName":"daliworksWeather","model":"humidityOpenAPI","type":"humidity","category":"sensor","name":"humidity_2","reqId": config.other.sensorId,"deviceId":"e790aa116b634aa191a0ee20780cb713","virtual":"y"},
         "expectedErr" : {
           "statusCode" : "409",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "CONFLICT"
+        }
+      },
+      "billing" : {
+        "paramObj" : { gwId : config.me.limitGwId },
+        "reqBody" : {"network":"daliworks","driverName":"daliworksEmulator","model":"doorEmulator","sequence":"1","type":"onoff","category":"sensor","name":"onoff_1","reqId":"onoff-777f869932564e4aa6b937a2a7f9cc2e-1","deviceId":config.me.limitDeviceId,"virtual":"y"},
+        "expectedErr" : {
+          "statusCode" : "471",
+          "errCode" : "BILLING"
         }
       },
       "schemaErr01" : { // missing reqId
@@ -500,7 +503,7 @@ module.exports = {
         "param" : "fdsfdsfsdf",
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       }
     }
@@ -518,13 +521,14 @@ module.exports = {
         "paramObj" : "dsfrewdsfdfds",
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       }
     },
     "put" : {
       "unAuthorized" : {
         "paramObj": config.other,
+        "reqBody" : {"timeout": 90, "value" : "on"},
         "expectedErr" : {
           "statusCode" : "403",
           "errCode" : "ACCESSGROUP_DENY"
@@ -532,9 +536,10 @@ module.exports = {
       },
       "notfound" : {
         "paramObj" : "dsfrewdsfdfds",
+        "reqBody" : {"timeout": 90, "value" : "on"},
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       },
       "schemaErr01" : { // add key "test":"test"
@@ -611,7 +616,7 @@ module.exports = {
       },
       "unAuthorized03" : { //others gateway , others sensor
         "paramObj" : {
-           gwId: config.others.gwId,
+           gwId: config.other.gwId,
            sensorId : config.other.sensorId
         },
         "expectedErr" : {
@@ -632,11 +637,11 @@ module.exports = {
       "notfound01" :{ //my gateway , no sensor
         "paramObj" : {
           gwId : config.me.gwId,
-          sensorId : "fdsfdsertwdffds"
+          sensorId : "1234eeee54fa"
         },
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       },
       "notfound01" :{ //no gateway , my sensor
@@ -646,7 +651,7 @@ module.exports = {
         },
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       }
     },
@@ -675,7 +680,7 @@ module.exports = {
       },
       "unAuthorized03" : { //others gateway , others sensor
         "paramObj" : {
-           gwId: config.others.gwId,
+           gwId: config.other.gwId,
            sensorId : config.other.sensorId
         },
         "reqBody" : {"timeout": 90, "value" : "on"},
@@ -703,7 +708,7 @@ module.exports = {
         "reqBody" : {"timeout": 90, "value" : "on"},
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       },
       "notfound01" :{ //no gateway , my sensor
@@ -714,7 +719,7 @@ module.exports = {
         "reqBody" : {"timeout": 90, "value" : "on"},
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       },
       "schemaErr01" : { // add key "test":"test"
@@ -791,7 +796,7 @@ module.exports = {
       },
       "unAuthorized03" : { //others gateway , others sensor
         "paramObj" : {
-           gwId: config.others.gwId,
+           gwId: config.other.gwId,
            sensorId : config.other.sensorId
         },
         "expectedErr" : {
@@ -802,7 +807,7 @@ module.exports = {
       "unAuthorized04" : { //others gateway , no sensor
         "paramObj" : {
            gwId: config.other.gwId,
-           sensorId : "234234dsfffdsdfs"
+           sensorId : "1111eeeeff34"
         },
         "expectedErr" : {
           "statusCode" : "403",
@@ -816,7 +821,7 @@ module.exports = {
         },
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       },
       "notfound01" :{ //no gateway , my sensor
@@ -826,7 +831,7 @@ module.exports = {
         },
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       }
     },
@@ -855,7 +860,7 @@ module.exports = {
       },
       "unAuthorized03" : { //others gateway , others sensor
         "paramObj" : {
-           gwId: config.others.gwId,
+           gwId: config.other.gwId,
            sensorId : config.other.sensorId
         },
         "reqBody" : {"value": "15","time": 1492668382336}, 
@@ -883,7 +888,7 @@ module.exports = {
         "reqBody" : {"value": "15","time": 1492668382336}, 
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       },
       "notfound01" :{ //no gateway , my sensor
@@ -894,7 +899,7 @@ module.exports = {
         "reqBody" : {"value": "15","time": 1492668382336}, 
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       },
       "schemaErr01" : { // past time
@@ -960,7 +965,7 @@ module.exports = {
         "param" : config.me.ruleIdNotFound,
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       }
     },
@@ -978,7 +983,7 @@ module.exports = {
         "reqBody" : {"name" : "changed name", "status": "activated","severity": "warning"},
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       },
       "schemaErr01" : { // add key "test":"test"
@@ -1212,7 +1217,7 @@ module.exports = {
         "param" : config.me.ruleIdNotFound,
         "expectedErr" : {
           "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "errCode" : "NOT_FOUND"
         }
       }
     }
@@ -1229,8 +1234,8 @@ module.exports = {
       "notfound" : {
         "param" : "notfoundxxefdlfljkdfsjlkfjl",
         "expectedErr" : {
-          "statusCode" "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "statusCode" : "404",
+          "errCode" : "NOT_FOUND"
         }
       }
     },
@@ -1247,8 +1252,8 @@ module.exports = {
         "param" : "notfoundxxefdlfljkdfsjlkfjl",
         "reqBody" : {"provider":"g","activated":"n","authClientId":"admin"},
         "expectedErr" : {
-          "statusCode" "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "statusCode" : "404",
+          "errCode" : "NOT_FOUND"
         }
       },
       "schemaErr01" : { // add key "test" : "test"
@@ -1304,8 +1309,8 @@ module.exports = {
       "conflict" : {
         "reqBody" : {"reqId":config.me.pushDeviceId,"provider":"a","activated":"n","authClientId":"chrislee"},
         "expectedErr" : {
-          "statusCode" : "409"
-          "errCode" : "DB_INTERNAL_ERROR"
+          "statusCode" : "409",
+          "errCode" : "CONFLICT"
         }
       },
       "schemaErr01" : { // add key "test" : "test"
@@ -1390,8 +1395,8 @@ module.exports = {
       "notfound" : {
         "param" : "notfoundxxefdlfljkdfsjlkfjl",
         "expectedErr" : {
-          "statusCode" "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "statusCode" : "404",
+          "errCode" : "NOT_FOUND"
         }
       }
     }
@@ -1399,9 +1404,9 @@ module.exports = {
   "/controlActuator" : {
     "post" : {
       "timeout" : {
-        "reqBody" : {"id":config.me.gwId,"act":"controlActuator","params":{"id":config.me.sesnorId,"cmd":"get","options":{"row":1,"column":1,"text":"aaa"}}},
+        "reqBody" : {"id":config.me.gwId,"act":"controlActuator","params":{"id":config.me.sensorId,"cmd":"get","options":{"row":1,"column":1,"text":"aaa"}}},
         "expectedErr" : {
-          "statusCode" : "504",
+          "statusCode" : "504", // --timeout 31000 option 필요
           "errCode" : "PROCESS_COMMAND_RESULT"
         }
       },
@@ -1409,77 +1414,84 @@ module.exports = {
         "reqBody" : {"id":config.me.actGwId,"act":"controlActuator","params":{"id":config.other.sensorId,"cmd":"get","options":{"row":1,"column":1,"text":"aaa"}}},
         "expectedErr" : {
           "statusCode" : "403",
-          "expectedErr" : "ACCESSGROUP_DENY"
+          "errCode" : "ACCESSGROUP_DENY"
         }
       },
       "notfound" : {
-        "reqbody" : {"id":config.me.actGwId,"act":"controlActuator","params":{"id":"ffsdfdsfsdffsfsd","cmd":"get","options":{"row":1,"column":1,"text":"aaa"}}},
+        "reqBody" : {"id":"dfdsfdsfsdfsdfdsffdsffsdf","act":"controlActuator","params":{"id":"ffsdfdsfsdffsfsd","cmd":"get","options":{"row":1,"column":1,"text":"aaa"}}},
         "expectedErr" : {
           "statusCode" : "404",
-          "expectedErr" :"DB_INTERNAL_ERROR"
+          "errCode" :"NOT_FOUND"
         }
       },
       "schemaErr01" : { //missing Id
         "reqBody" : {"act":"controlActuator","params":{"id":config.me.actSensorId,"cmd":"print","options":{"row":0,"column":0,"text":"test"}}},
         "expectedErr" : {
           "statusCode" : "400",
-          "expectedErr" : "SCHEMA_VALIDATE"
+          "errCode" : "SCHEMA_VALIDATE"
         }
       },
       "schemaErr02" : { // missing act
         "reqBody" : {"id":config.me.actGwId,"params":{"id":config.me.actSensorId,"cmd":"print","options":{"row":0,"column":0,"text":"test"}}},
         "expectedErr" : {
           "statusCode" : "400",
-          "expectedErr" : "SCHEMA_VALIDATE"
+          "errCode" : "SCHEMA_VALIDATE"
         }
       },
       "schemaErr03" : { // missing params
         "reqBody" : {"id":config.me.actGwId,"act":"controlActuator"},
         "expectedErr" : {
           "statusCode" : "400",
-          "expectedErr" : "SCHEMA_VALIDATE"
+          "errCode" : "SCHEMA_VALIDATE"
         }
       },
       "schemaErr04" : { // missing params.id
         "reqBody" : {"id":config.me.actGwId,"act":"controlActuator","params":{"cmd":"print","options":{"row":0,"column":0,"text":"test"}}},
         "expectedErr" : {
           "statusCode" : "400",
-          "expectedErr" : "SCHEMA_VALIDATE"
+          "errCode" : "SCHEMA_VALIDATE"
         }
       },
       "schemaErr05" : { // missing params.cmd
         "reqBody" : {"id":config.me.actGwId,"act":"controlActuator","params":{"id":config.me.actSensorId,"options":{"row":0,"column":0,"text":"test"}}},
         "expectedErr" : {
           "statusCode" : "400",
-          "expectedErr" : "SCHEMA_VALIDATE"
+          "errCode" : "SCHEMA_VALIDATE"
         }
       },
-      "schemaErr06" : {
-        "reqBody" : {"id":config.me.actGwId,"act":"controlActuator","params":{"id":config.me.actSensorId,"cmd":"print","options":{"row":0,"column":0,"text":"test"}}},
+      "schemaErr06" : { // add additionalProperties "test" : "test"
+        "reqBody" : {"test":"test", "id":config.me.actGwId,"act":"controlActuator","params":{"id":config.me.actSensorId,"cmd":"print","options":{"row":0,"column":0,"text":"test"}}},
         "expectedErr" : {
           "statusCode" : "400",
-          "expectedErr" : "SCHEMA_VALIDATE"
+          "errCode" : "SCHEMA_VALIDATE"
         }
       },
       "schemaErr07" : { // act - number
         "reqBody" : {"id":config.me.actGwId,"act":123,"params":{"id":config.me.actSensorId,"cmd":"print","options":{"row":0,"column":0,"text":"test"}}},
         "expectedErr" : {
           "statusCode" : "400",
-          "expectedErr" : "SCHEMA_VALIDATE"
+          "errCode" : "SCHEMA_VALIDATE"
         }
       },
       "schemaErr08" : { // params.cmd - number
         "reqBody" : {"id":config.me.actGwId,"act":"controlActuator","params":{"id":config.me.actSensorId,"cmd":123,"options":{"row":0,"column":0,"text":"test"}}},
         "expectedErr" : {
           "statusCode" : "400",
-          "expectedErr" : "SCHEMA_VALIDATE"
+          "errCode" : "SCHEMA_VALIDATE"
         }
       },
-      "schemaErr01" : { //params.options - string
+      "schemaErr09" : { //params.options - string
         "reqBody" : {"id":config.me.actGwId,"act":"controlActuator","params":{"id":config.me.actSensorId,"cmd":"print","options":"test"}},
         "expectedErr" : {
           "statusCode" : "400",
-          "expectedErr" : "SCHEMA_VALIDATE"
+          "errCode" : "SCHEMA_VALIDATE"
+        }
+      },
+      "schemaErr10" : { // add additionalProperties "test" : "test" in params
+        "reqBody" : {"id":config.me.actGwId,"act":"controlActuator","params":{"test" : "test","id":config.me.actSensorId,"cmd":"print","options":"test"}},
+        "expectedErr" : {
+          "statusCode" : "400",
+          "errCode" : "SCHEMA_VALIDATE"
         }
       }
     }
@@ -1489,50 +1501,50 @@ module.exports = {
       "unAuthorized01" : {
         "reqBody" : {"id":"af135c176df24ed9a57497b1bdf7fef4","params":{"name":"Sumul3","siteId":config.other.siteId,"model":"32","deviceModels":[{"id":"ebcf17cdbb39438a858b099cdf240611","model":"sensorSimulator"}],"virtual":"y","reportInterval":1200000,"devices":[{"reqId":"ebcf17cdbb39438a858b099cdf240611","name":"Simul Device 3","model":"sensorSimulator"}],"sensors":[{"network":"daliworks","driverName":"daliworksWeather","model":"humidityDaliworks","type":"humidity","category":"sensor","name":"humidity_2","reqId":"humidityDaliworks-af135c176df24ed9a57497b1bdf7fef4","deviceId":"ebcf17cdbb39438a858b099cdf240611","virtual":"y"}]}},
         "expectedErr" : {
-          "statusCode" : "403"
-          "expectedErr" : "ACCESSGROUP_DENY"
+          "statusCode" : "403",
+          "errCode" : "ACCESSGROUP_DENY"
         }
       },
       "unAuthorized02" : {
         "reqBody" : {"id":config.other.gwId,"params":{"name":"Sumul3","siteId":config.me.siteId,"model":"32","deviceModels":[{"id":"ebcf17cdbb39438a858b099cdf240611","model":"sensorSimulator"}],"virtual":"y","reportInterval":1200000,"devices":[{"reqId":"ebcf17cdbb39438a858b099cdf240611","name":"Simul Device 3","model":"sensorSimulator"}],"sensors":[{"network":"daliworks","driverName":"daliworksWeather","model":"humidityDaliworks","type":"humidity","category":"sensor","name":"humidity_2","reqId":"humidityDaliworks-af135c176df24ed9a57497b1bdf7fef4","deviceId":"ebcf17cdbb39438a858b099cdf240611","virtual":"y"}]}},
         "expectedErr" : {
-          "statusCode" : "403"
-          "expectedErr" : "ACCESSGROUP_DENY"
+          "statusCode" : "403",
+          "errCode" : "ACCESSGROUP_DENY"
         }
       },
       "notfound01" : { //site
         "reqBody" : {"id":"af135c176df24ed9a57497b1bdf7fef4","params":{"name":"Sumul3","siteId":"10000","model":"32","deviceModels":[{"id":"ebcf17cdbb39438a858b099cdf240611","model":"sensorSimulator"}],"virtual":"y","reportInterval":1200000,"devices":[{"reqId":"ebcf17cdbb39438a858b099cdf240611","name":"Simul Device 3","model":"sensorSimulator"}],"sensors":[{"network":"daliworks","driverName":"daliworksWeather","model":"humidityDaliworks","type":"humidity","category":"sensor","name":"humidity_2","reqId":"humidityDaliworks-af135c176df24ed9a57497b1bdf7fef4","deviceId":"ebcf17cdbb39438a858b099cdf240611","virtual":"y"}]}},
         "expectedErr" : {
-          "statusCode" : "404"
-          "expectedErr" : "DB_INTERNAL_ERROR"
+          "statusCode" : "404",
+          "errCode" : "NOT_FOUND"
         }
       },
       "notfound02" : { //modelId
         "reqBody" : {"id":"af135c176df24ed9a57497b1bdf7fef4","params":{"name":"Sumul3","siteId":config.me.siteId,"model":"1000","deviceModels":[{"id":"ebcf17cdbb39438a858b099cdf240611","model":"sensorSimulator"}],"virtual":"y","reportInterval":1200000,"devices":[{"reqId":"ebcf17cdbb39438a858b099cdf240611","name":"Simul Device 3","model":"sensorSimulator"}],"sensors":[{"network":"daliworks","driverName":"daliworksWeather","model":"humidityDaliworks","type":"humidity","category":"sensor","name":"humidity_2","reqId":"humidityDaliworks-af135c176df24ed9a57497b1bdf7fef4","deviceId":"ebcf17cdbb39438a858b099cdf240611","virtual":"y"}]}},
         "expectedErr" : {
-          "statusCode" : "404"
-          "expectedErr" : "DB_INTERNAL_ERROR"
+          "statusCode" : "404",
+          "errCode" : "NOT_FOUND"
         }
       },
       "notfound03" : { //site =" "
         "reqBody" : {"id":"af135c176df24ed9a57497b1bdf7fef4","params":{"name":"Sumul3","siteId":" ","model":"32","deviceModels":[{"id":"ebcf17cdbb39438a858b099cdf240611","model":"sensorSimulator"}],"virtual":"y","reportInterval":1200000,"devices":[{"reqId":"ebcf17cdbb39438a858b099cdf240611","name":"Simul Device 3","model":"sensorSimulator"}],"sensors":[{"network":"daliworks","driverName":"daliworksWeather","model":"humidityDaliworks","type":"humidity","category":"sensor","name":"humidity_2","reqId":"humidityDaliworks-af135c176df24ed9a57497b1bdf7fef4","deviceId":"ebcf17cdbb39438a858b099cdf240611","virtual":"y"}]}},
         "expectedErr" : {
-          "statusCode" : "404"
-          "expectedErr" : "DB_INTERNAL_ERROR"
-        }
-      },
-      "multistatus01" : {
-        "reqBody" : {"id":config.me.gwId,"params":{"name":"Sumul3","siteId":config.me.siteId,"model":"32","deviceModels":[{"id":"ebcf17cdbb39438a858b099cdf240611","model":"sensorSimulator"}],"virtual":"y","reportInterval":1200000,"devices":[{"reqId":"ebcf17cdbb39438a858b099cdf240611","name":"Simul Device 3","model":"sensorSimulator"}],"sensors":[{"network":"daliworks","driverName":"daliworksWeather","model":"humidityDaliworks","type":"humidity","category":"sensor","name":"humidity_2","reqId":"humidityDaliworks-af135c176df24ed9a57497b1bdf7fef4","deviceId":"ebcf17cdbb39438a858b099cdf240611","virtual":"y"}]}},
-        "expectedErr" : {
-          "statusCode" : "207",
-          "errCode" : "CONFLICT"
+          "statusCode" : "404",
+          "errCode" : "NOT_FOUND"
         }
       },
       "multistatus02" : {
-        "reqBody" : {"id":"af135c176df24ed9a57497b1bdf7fef4","params":{"name":"Sumul3","siteId":config.me.siteId,"model":"32","deviceModels":[{"id":"ebcf17cdbb39438a858b099cdf240611","model":"sensorSimulator"}],"virtual":"y","reportInterval":1200000,"devices":[{"reqId":config.other.deviceId,"name":"Simul Device 3","model":"sensorSimulator"}],"sensors":[{"network":"daliworks","driverName":"daliworksWeather","model":"humidityDaliworks","type":"humidity","category":"sensor","name":"humidity_2","reqId":"humidityDaliworks-af135c176df24ed9a57497b1bdf7fef4","deviceId":"ebcf17cdbb39438a858b099cdf240611","virtual":"y"}]}},
+        "reqBody" : {"id":"af135c176df24ed9a57412b1bdf7fef4","params":{"name":"Sumul3","siteId":config.me.siteId,"model":"32","deviceModels":[{"id":"ebcf17cdbb39438a858b099cdf240611","model":"sensorSimulator"}],"virtual":"y","reportInterval":1200000,"devices":[{"reqId":config.other.deviceId,"name":"Simul Device 3","model":"sensorSimulator"}],"sensors":[{"network":"daliworks","driverName":"daliworksWeather","model":"humidityDaliworks","type":"humidity","category":"sensor","name":"humidity_2","reqId":"humidityDaliworks-af135c176df24ed9a57497b1bdf7fef4","deviceId":"ebcf17cdbb39438a858b099cdf240611","virtual":"y"}]}},
         "expectedErr" : {
           "statusCode" : "207",
           "errCode" : "CONFLICT"
+        }
+      },
+      "multistatus03" : {
+        "reqBody" : {"id":"af135c176df24ed9a23497b1bdf7fef4","params":{"name":"Sumul3","siteId":config.me.notPlanSiteId,"model":"32","deviceModels":[{"id":"ebcf17cdbb39438a858b099cdf240611","model":"sensorSimulator"}],"virtual":"y","reportInterval":1200000,"devices":[{"reqId":"ebcf17cdbb39438a858b099cdf240611","name":"Simul Device 3","model":"sensorSimulator"}],"sensors":[{"network":"daliworks","driverName":"daliworksWeather","model":"humidityDaliworks","type":"humidity","category":"sensor","name":"humidity_2","reqId":"humidityDaliworks-af135c176df24ed9a57497b1bdf7fef4","deviceId":"ebcf17cdbb39438a858b099cdf240611","virtual":"y"}]}},
+        "expectedErr" : {
+          "statusCode" : "471",
+          "errCode" : "BILLING"
         }
       },
       "schemaErr01" : { //missing Id
@@ -1644,11 +1656,11 @@ module.exports = {
           "errCode" : "ACCESSGROUP_DENY"
         }
       },
-      "notfound" : {
-        "reqBody" : {"id":"fdsfdsfdfdsf","modelId":"32","authType":"apikey"},
+      "schemaErr08" : { // invalid gateway id
+        "reqBody" : {"id":"1111gfd111e1","modelId":"32","authType":"apikey"},
         "expectedErr" : {
-          "statusCode" : "404",
-          "errCode" : "DB_INTERNAL_ERROR"
+          "statusCode" : "400",
+          "errCode" : "SCHEMA_VALIDATE"
         }
       },
       "schemaErr01" : { //add key "test":"test"
@@ -1703,12 +1715,84 @@ module.exports = {
     }
   },
   "/activateGatewayKey" : {
-    "post" : {
-
-    }
+    "post" : { 
+      "otherkey" : { //other vendorkey
+        "reqBody" : {"gatewayId":config.me.gwId,"vendorKey":config.other.vendorKey},
+        "expectedErr" : {
+          "statusCode" : "400",
+          "errCode" : "MISMATCH_ERROR"
+        }
+      },
+      "othergw" : { // registered gateway by other vendor key
+          "reqBody" : {"gatewayId":config.other.gwId,"vendorKey":config.me.vendorKey},
+          "expectedErr" : {
+            "statusCode" : "400",
+            "errCode" : "MISMATCH_ERROR"
+        }
+      },
+      "dummyGwId" : { //dummy gateway Id
+          "reqBody" : {"gatewayId":"b324494bd2394aaab02fc540670f474c","vendorKey":config.other.vendorKey},
+          "expectedErr" : {
+            "statusCode" : "500",
+            "errCode" : "QUERY_RESULT_EMPTY"
+          }
+       },
+       "invalidGwId" : { //invalid gateway Id
+          "reqBody" : {"gatewayId":"b324494bd2394aaddab02fc540670f474c","vendorKey":config.other.vendorKey},
+          "expectedErr" : {
+            "statusCode" : "400",
+            "errCode" : "SCHEMA_VALIDATE"
+          }
+       },
+       "dummyVendorKey" : { //dummy vendorkey 
+          "reqBody" : {"gatewayId":config.me.gwId,"vendorKey":"h5z68lamBLBmvKUesdeiOA8DmQs="},
+          "expectedErr" : {
+            "statusCode" : "404",
+            "errCode" : "NOT_FOUND"
+          }
+       },
+       "notyet" : { // my vendorkey but not read to registerdkey yet
+          "reqBody" : {"gatewayId":config.me.actGwId,"vendorKey":config.other.vendorKey},
+          "expectedErr" : {
+            "statusCode" : "500",
+            "errCode" : "QUERY_RESULT_EMPTY"
+          }
+       },
+       "schemaErr01" : { //missing gateway Id
+          "reqBody" : {"vendorKey":config.other.vendorKey},
+          "expectedErr" : {
+            "statusCode" : "400",
+            "errCode" : "SCHEMA_VALIDATE"
+          }
+       },
+       "schemaErr02" : { //mising vendorKey
+          "reqBody" : {"gatewayId":config.me.gwId},
+          "expectedErr" : {
+            "statusCode" : "400",
+            "errCode" : "SCHEMA_VALIDATE"
+          }
+       },
+       "schemaErr03" : { //number type -  gateway Id
+          "reqBody" : {"gatewayId":123,"vendorKey":config.other.vendorKey},
+          "expectedErr" : {
+            "statusCode" : "400",
+            "errCode" : "SCHEMA_VALIDATE"
+          }
+       },
+       "schemaErr04" : { //Not string type -  gateway Id
+          "reqBody" : {"gatewayId":{},"vendorKey":config.other.vendorKey},
+          "expectedErr" : {
+            "statusCode" : "400",
+            "errCode" : "SCHEMA_VALIDATE"
+          }
+       },
+       "schemaErr05" : { //number - vendorkey
+          "reqBody" : {"gatewayId":config.me.gwId,"vendorKey":123},
+          "expectedErr" : {
+            "statusCode" : "400",
+            "errCode" : "SCHEMA_VALIDATE"
+          }
+       }
+     }
   }
-
-
-
-
 }

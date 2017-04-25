@@ -6,12 +6,20 @@ var chakram = require('chakram'),
   prettyjson = require('prettyjson'),
 	expect = chakram.expect,
 	async = require('async'),
+  program = require('commander'),
 	_ = require('lodash');
-  
+
+
+program
+  .version('0.5.0')
+  .option('-c, --config <config>', 'config file')
+  .option('-v, --vvv <vvv>', 'api version')
+  .parse(process.argv);
+
 var config = require('./config_testih'),
-  errBody = require('./errBody'),
-  tutil = require('./test-util');
-  
+    errBody = require('./errBody'),
+    tutil = require('./test-util');
+
 var REST_METHODS = ['post', 'get', 'put', 'delete'];
 
 describe('Rest API Error Test', function () {
@@ -48,7 +56,7 @@ describe('Rest API Error Test', function () {
         paramObj = methodObj.paramObj || paramObj;
         _.forOwn(methodObj, function(caseObj, caseName) {
           paramObj = caseObj.paramObj || paramObj;
-          console.log('@@@@@@@@@@@@@@@@@@####', url + ' (' + method + ') ' + caseName);
+          // console.log('@@@@@@@@@@@@@@@@@@####', url + ' (' + method + ') ' + caseName);
           
           var apiCall, reqBody;
           var renderedUrl = tutil.supplant(url, paramObj);
@@ -79,6 +87,7 @@ describe('Rest API Error Test', function () {
               var expectedErrCode = caseObj.expectedErr.errCode;
               var body = res.body;
               var statusCode = res.response.statusCode;
+
               
               if (statusCode !== expectedStatusCode) {
                 console.log('statusCode=', statusCode, ', expectedStatusCode=', expectedStatusCode);
@@ -91,7 +100,12 @@ describe('Rest API Error Test', function () {
               
               if (!_.isObject(body)) { return; }
               
-              var errCode = body.errors[0].code;
+              if (config.version == 'v2'){
+                var errCode = body.errors[0].code;
+              }
+              if (config.version == 'v1'){
+                var errCode = body.code;
+              }
               expect(expectedErrCode).to.be.equal(errCode);
             });
           });

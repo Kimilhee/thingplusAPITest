@@ -10,7 +10,7 @@ var chakram = require('chakram'),
   Ajv = require('ajv'),
 	_ = require('lodash');
   
-var config = require('./config_ihmini'),
+var config = require('./config_sandbox'),
   swagger = require('./swagger.json'),
   tutil = require('./test-util'),
   ajv = new Ajv(),
@@ -106,9 +106,12 @@ var afterEffect = {
   '/gateways/{id}:get': tutil.saveObjectForNextApiCall.bind(null, 'gateways'),
 };
 
-var preSetBody = {
+var preSetBody = { //schema 대신에 쓰고 싶은 request body는 여기에 다시 정의 
+  '/registerGateway:post' : function (){
+    return {"id":"8cf8afabb6264e2d8ec15c5955e84e5c","params":{"name":"MyVirtualGateway","siteId":config.me.siteId,"model":"6","deviceModels":[{"id":"9944c36915f44a428b07e25c5e5e72c9","model":"emulator"}],"virtual":"y","reportInterval":3600000,"devices":[{"reqId":"9944c36915f44a428b07e25c5e5e72c9","name":"MySensorEmulDevice","model":"emulator"}],"sensors":[{"network":"daliworks","driverName":"daliworksEmulator","model":"temperatureEmulator","sequence":"1","type":"temperature","category":"sensor","name":"temperature_1","reqId":"temperature-8cf8afabb6264e2d8ec15c5955e84e5c-1","deviceId":"9944c36915f44a428b07e25c5e5e72c9","virtual":"y"},{"network":"daliworks","driverName":"daliworksEmulator","model":"co2Emulator","sequence":"1","type":"co2","category":"sensor","name":"co2_1","reqId":"co2-8cf8afabb6264e2d8ec15c5955e84e5c-1","deviceId":"9944c36915f44a428b07e25c5e5e72c9","virtual":"y"},{"network":"daliworks","driverName":"daliworksEmulator","model":"coEmulator","sequence":"1","type":"co","category":"sensor","name":"co_1","reqId":"co-8cf8afabb6264e2d8ec15c5955e84e5c-1","deviceId":"9944c36915f44a428b07e25c5e5e72c9","virtual":"y"}]}}
+  },
   '/gateways/{owner}/sensors/{id}/status:put': function(opInfo) {
-    return opInfo.parameters[0].schema.example;
+    return opInfo.parameters[0].schema.example; 
   },
   '/gateways/{owner}/sensors/{id}/series:put': function() {
     return {

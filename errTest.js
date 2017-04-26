@@ -16,12 +16,12 @@ program
   .option('-v, --vvv <vvv>', 'api version')
   .parse(process.argv);
 
-var config = require('./config_testih'),
+var config = require('./config_sandbox'),
     errBody = require('./errBody'),
     tutil = require('./test-util');
 
 var REST_METHODS = ['post', 'get', 'put', 'delete'];
-
+console.log(config.host);
 describe('Rest API Error Test', function () {
   var authInfo;
   

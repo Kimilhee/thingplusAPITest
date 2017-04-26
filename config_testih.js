@@ -38,3 +38,4 @@ module.exports = { //chris / dali1234 (ac2b70cf9afeed9d6cc6c4090370c9e3)\
     "vendorKey" : "r355E75FcaOb_h6F2itJQUFiWg0=" //dowonDNS 26
   }
 }
+//chris / dali1234 로 로그인 필요  //대조군 other / dali1234

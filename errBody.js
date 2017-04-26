@@ -1,7 +1,7 @@
-var config = require("./config_testih.js");
+var config = require("./config_sandbox.js");
 
 module.exports = {
-  "/users/me/": { //chris / dali1234 로 로그인 필요  //대조군 other / dali1234
+  "/users/me/": { 
     "get" : {
       "notfound" : {
         "param" : "2",

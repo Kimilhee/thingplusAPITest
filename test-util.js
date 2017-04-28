@@ -16,7 +16,9 @@ function supplant(str, obj) {
   });
 }
 
-var apiObjects = {};
+var apiObjects = {
+  gateways: { id: '8cf8afabb6264e2d8ec15c5955e84e5c'}  // 임시 test 용. 지워도 관계 없음.
+};
 function saveObjectForNextApiCall(apiStartName, obj) {
   if (_.isArray(obj)) {
     obj = obj[0];
@@ -62,7 +64,7 @@ function removeValues(obj, removeKeys) {
       delete obj[key];
     } else {
       if (_.isObject(obj)) {
-        removeValues(obj[key]);
+        removeValues(obj[key], removeKeys);
       }
     }
   });
